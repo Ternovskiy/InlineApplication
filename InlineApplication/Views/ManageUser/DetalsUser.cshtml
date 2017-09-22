@@ -1,0 +1,43 @@
+﻿@model DataModul.Models.User
+
+<script>
+    $(function() {
+
+        $("#detalsMerchComents").load('@Url.Action("GetComments","Rating")', {idMerch:@Model.Id});
+    });
+</script>
+
+
+<h3 class="text-center"><strong> @Model.Name </strong></h3>
+
+<div class="row">
+    <img class="img-rounded" src="@ViewBag.img" align="left" style="margin-right: 50px" />
+   
+
+   
+    <h4>@Html.DisplayNameFor(m => Model.FirsName): @Model.FirsName</h4>
+    
+
+    
+    <button class="btn btn-success center-block" onclick="AddMerchandiseForOrder(@Model.LastName)">del edit</button>
+
+</div>
+
+
+
+<div class="panel-group" id="accordion2">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title" align="center">
+                <a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2">Подписки</a>
+            </h4>
+        </div>
+        <div id="collapseOne2" class="panel-collapse collapse">
+            <div class="panel-body">
+
+                <div id="detalsMerchComents"></div>
+
+            </div>
+        </div>
+    </div>
+</div>

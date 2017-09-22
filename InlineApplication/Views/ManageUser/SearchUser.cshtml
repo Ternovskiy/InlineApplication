@@ -1,0 +1,78 @@
+﻿
+@model IEnumerable<DataModul.Models.User>
+    
+<script>
+    function ShowMerchDetals(i) {
+        $('#detalsMerch').load('@Url.Action("DetalsUser")', { idMerch: i });
+    }
+</script>
+
+@foreach (var item in Model)
+{
+    <div class="navbar navbar-default" onclick="ShowMerchDetals(@item.FirsName)">
+        <div class="row">
+            <div class="col-md-8">
+                <h3 style="margin: 10px;"><small>@item.LastName</small></h3>
+            </div>
+        </div>
+                
+    </div>
+}
+  
+
+
+@{
+    int pNumber = ViewBag.pageNumber - 1;
+    int nNumber = ViewBag.pageNumber + 1;
+}
+
+@if (ViewBag.pageCount > ViewBag.pageSize)
+{
+
+    <div class="text-center">
+
+        <ul class="pagination">
+            @if (pNumber < 1)
+            {
+                <li class="disabled">
+                    <a>
+                        &laquo;
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a onclick="ClickPageUser(@pNumber)">&laquo;</a>
+                </li>
+            }
+
+
+
+
+            @for (int i = 1; (i - 1) * ViewBag.pageSize <= ViewBag.pageCount; i++)
+            {
+                <li @if (ViewBag.pageNumber == i) {  @: class="active"
+                    }><a onclick="ClickPageUser(@i)">@i</a></li>
+            }
+
+            @if ((nNumber - 1) * ViewBag.pageSize > ViewBag.pageCount)
+            {
+                <li class="disabled">
+                    <a>
+                        &raquo;
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a onclick="ClickPageUser(@nNumber)">&raquo;</a>
+                </li>
+            }
+
+        </ul>
+
+    </div>
+
+}

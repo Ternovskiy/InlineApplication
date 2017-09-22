@@ -3,12 +3,12 @@
 <script>
     $(function() {
 
-        $("#detalsMerchComents").load('@Url.Action("GetComments","Rating")', {idMerch:@Model.Id});
+        @*$("#detalsMerchComents").load('@Url.Action("GetComments","Rating")', {idMerch:@Model.Id});*@
     });
 </script>
 
 
-<h3 class="text-center"><strong> @Model.Name </strong></h3>
+<h3 class="text-center"><strong> @Model.FirsName </strong></h3>
 
 <div class="row">
     <img class="img-rounded" src="@ViewBag.img" align="left" style="margin-right: 50px" />

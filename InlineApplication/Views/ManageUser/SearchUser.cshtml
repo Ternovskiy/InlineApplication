@@ -2,17 +2,18 @@
 @model IEnumerable<DataModul.Models.User>
     
 <script>
-    function ShowMerchDetals(i) {
-        $('#detalsMerch').load('@Url.Action("DetalsUser")', { idMerch: i });
+    function ShowUserDetals(i) {
+        $('#detalsUser').load('@Url.Action("DetalsUser")', { idUser: i });
+        alert(i);
     }
 </script>
 
 @foreach (var item in Model)
 {
-    <div class="navbar navbar-default" onclick="ShowMerchDetals(@item.FirsName)">
+    <div class="navbar navbar-default" onclick="ShowUserDetals(@item.Id)">
         <div class="row">
             <div class="col-md-8">
-                <h3 style="margin: 10px;"><small>@item.LastName</small></h3>
+                <h3 style="margin: 10px;"><small> @item.LastName</small></h3>
             </div>
         </div>
                 

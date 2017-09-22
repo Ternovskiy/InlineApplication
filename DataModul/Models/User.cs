@@ -10,6 +10,7 @@ namespace DataModul.Models
     [MetadataType(typeof(ModelViewUser))]
     public partial class User
     {
+        public int Id { get; set; }
         public string FirsName { get; set; }
         public string LastName { get; set; }
         public string MiddleName { get; set; }

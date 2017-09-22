@@ -54,7 +54,7 @@ namespace InlineApplication.Controllers
         public ActionResult DetalsUser(int idUser)
         {
             var r = new Random();
-            ViewBag.img = @"/Content/img/" + r.Next(1, 5) + ".jpg";
+            ViewBag.img = @"/Content/img/" + r.Next(1, 5) + ".png";
             return PartialView(Repository.GerUser(idUser));
         }
 

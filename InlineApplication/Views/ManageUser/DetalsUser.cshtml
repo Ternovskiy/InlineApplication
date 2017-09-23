@@ -1,4 +1,4 @@
-﻿@model DataModul.Models.User
+﻿@model Interfaces.Models.AUser
 
 <script>
     $(function() {
@@ -8,14 +8,14 @@
 </script>
 
 
-<h3 class="text-center"><strong> @Model.FirsName </strong></h3>
+<h3 class="text-center"><strong> @Model.FirstName </strong></h3>
 
 <div class="row">
     <img class="img-rounded" src="@ViewBag.img" align="left" style="margin-right: 50px" />
    
 
    
-    <h4>@Html.DisplayNameFor(m => Model.FirsName): @Model.FirsName</h4>
+    <h4>@Html.DisplayNameFor(m => Model.FirstName): @Model.FirstName</h4>
     
 
     

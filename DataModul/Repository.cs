@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataModul.Models;
+using Interfaces;
+using Interfaces.Models;
 
 namespace DataModul
 {
-    public class Repository:IRepository
+    public class Repository: IRepository
     {
         public Repository(string conStr)
         {
@@ -15,28 +17,28 @@ namespace DataModul
         }
 
 
-        public IEnumerable<User> GetUsers(string name, int pageSize, int page, ref int countPage)
+        public IEnumerable<AUser> GetUsers(string name, int pageSize, int page, ref int countPage)
         {
-            var users=new List<User>()
+            var users=new List<AUser>()
             {
-                new User(){Id = 1,Email = "dsfsdf",FirsName = "dsfsd",LastName = "dsfsd",MiddleName = "dfd"},
-                new User(){Id = 2,Email = "dsfggfgsdf",FirsName = "dgggsfsd",LastName = "dsggfsd",MiddleName = "dfgggd"},
-                new User(){Id = 3,Email = "Email",FirsName = "FirsName",LastName = "LastName",MiddleName = "MiddleName"},
-                new User(){Id =4 ,Email = "Email",FirsName = "FirsName",LastName = "LastName",MiddleName = "MiddleName"},
-                new User(){Id = 5,Email = "Email",FirsName = "FirsName",LastName = "LastName",MiddleName = "MiddleName"},
-                new User(){Id =6 ,Email = "Email",FirsName = "FirsName",LastName = "LastName",MiddleName = "MiddleName"},
-                new User(){Id = 7,Email = "Email",FirsName = "FirsName",LastName = "LastName",MiddleName = "MiddleName"},
-                new User(){Id = 8,Email = "Email",FirsName = "FirsName",LastName = "LastName",MiddleName = "MiddleName"},
-                new User(){Id = 9,Email = "Email",FirsName = "FirsName",LastName = "LastName",MiddleName = "MiddleName"},
-                new User(){Id = 10,Email = "Email",FirsName = "FirsName",LastName = "LastName",MiddleName = "MiddleName"},
+                new User(){idUser = 1,Email = "dsfsdf",FirstName = "dsfsd",LastName = "dsfsd",MiddleName = "dfd"},
+                new User(){idUser = 2,Email = "dsfggfgsdf",FirstName = "dgggsfsd",LastName = "dsggfsd",MiddleName = "dfgggd"},
+                new User(){idUser = 3,Email = "Email",FirstName = "FirstName",LastName = "LastName",MiddleName = "MiddleName"},
+                new User(){idUser =4 ,Email = "Email",FirstName = "FirstName",LastName = "LastName",MiddleName = "MiddleName"},
+                new User(){idUser = 5,Email = "Email",FirstName = "FirstName",LastName = "LastName",MiddleName = "MiddleName"},
+                new User(){idUser =6 ,Email = "Email",FirstName = "FirstName",LastName = "LastName",MiddleName = "MiddleName"},
+                new User(){idUser = 7,Email = "Email",FirstName = "FirstName",LastName = "LastName",MiddleName = "MiddleName"},
+                new User(){idUser = 8,Email = "Email",FirstName = "FirstName",LastName = "LastName",MiddleName = "MiddleName"},
+                new User(){idUser = 9,Email = "Email",FirstName = "FirstName",LastName = "LastName",MiddleName = "MiddleName"},
+                new User(){idUser = 10,Email = "Email",FirstName = "FirstName",LastName = "LastName",MiddleName = "MiddleName"},
             };
             countPage = users.Count;
             return users.Skip(pageSize*(page-1)).Take(pageSize);
         }
 
-        public User GerUser(int idUser)
+        public AUser GerUser(int idUser)
         {
-            return new User() { Id = idUser, Email = "user"+ idUser, FirsName = "user", LastName = "user", MiddleName = "user" };
+            return new User() { idUser = idUser, Email = "user"+ idUser, FirstName = "user", LastName = "user", MiddleName = "user" };
         }
     }
 }

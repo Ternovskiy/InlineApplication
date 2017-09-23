@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using DataModul.Models;
+using Interfaces.Models;
 
-namespace DataModul
+namespace Interfaces
 {
     public interface IRepository
     {
-        IEnumerable<User> GetUsers(string name, int pageSize, int page, ref int countPage);
-        User GerUser(int idUser);
+        IEnumerable<AUser> GetUsers(string name, int pageSize, int page, ref int countPage);
+        AUser GerUser(int idUser);
     }
 }

@@ -160,7 +160,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -189,6 +195,10 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />
@@ -221,16 +231,23 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\ManageNotice\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataModulEntety\DataModulEntety.csproj">
+      <Project>{f925d514-9fbc-436c-bb7b-9821da66be38}</Project>
+      <Name>DataModulEntety</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataModul\DataModul.csproj">
       <Project>{71dc1830-1475-404b-b9a2-219cd8502ab4}</Project>
       <Name>DataModul</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces\_Interfaces.csproj">
+      <Project>{623547e1-d44b-4860-98dc-698fc1f64bbd}</Project>
+      <Name>_Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -1,4 +1,6 @@
 using DataModul;
+using DataModulEntety;
+using Interfaces;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(InlineApplication.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(InlineApplication.App_Start.NinjectWebCommon), "Stop")]
@@ -64,12 +66,13 @@ namespace InlineApplication.App_Start
         private static void RegisterServices(IKernel kernel)
         {
 
-           // var conStr = System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"]
-           //     .ConnectionString;
-            var conStr = "";
+            //var conStr = System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"]
+            //    .ConnectionString;
 
+            var conStr = Properties.Settings.Default.DefaultConnection;
 
-            kernel.Bind<IRepository>().ToMethod(_ => new Repository(conStr));
+            //kernel.Bind<IRepository>().ToMethod(_ => new Repository(conStr));
+            kernel.Bind<IRepository>().ToMethod(_ => new RepositoryEntety(conStr));
         }        
     }
 }

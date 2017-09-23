@@ -1,16 +1,16 @@
 ﻿
-@model IEnumerable<DataModul.Models.User>
+@model IEnumerable<Interfaces.Models.AUser>
     
 <script>
     function ShowUserDetals(i) {
         $('#detalsUser').load('@Url.Action("DetalsUser")', { idUser: i });
-        alert(i);
+        
     }
 </script>
 
 @foreach (var item in Model)
 {
-    <div class="navbar navbar-default" onclick="ShowUserDetals(@item.Id)">
+    <div class="navbar navbar-default" onclick="ShowUserDetals(@item.idUser)">
         <div class="row">
             <div class="col-md-8">
                 <h3 style="margin: 10px;"><small> @item.LastName</small></h3>

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using Interfaces.Models;
+using Interfaces.Models.User;
 
 namespace Interfaces
 {
-    public interface IRepository
+    public partial interface IRepository: IRepositoryUser
     {
-        IEnumerable<AUser> GetUsers(string name, int pageSize, int page, ref int countPage);
-        AUser GerUser(int idUser);
+
     }
 }

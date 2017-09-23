@@ -27,6 +27,12 @@ namespace Interfaces.Models
         public virtual string LastName { get; set; }
         public virtual string MiddleName { get; set; }
         public virtual string Email { get; set; }
+
+
+        public override string ToString()
+        {
+            return $"{FirstName} {LastName.Substring(0, 1)}.{MiddleName.Substring(0,1)}.";
+        }
     }
     
 

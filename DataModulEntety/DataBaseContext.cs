@@ -11,10 +11,15 @@ namespace DataModulEntety
     public class DataBaseContext : DbContext
     {
 
-        public DataBaseContext(string ConStr) : base(ConStr) { }
-
+        public DataBaseContext(string ConStr) : base(ConStr)
+        {
+            var s = this.States.ToList();
+        }
 
         public DbSet<User> Users { get; set; }
+
+        public DbSet<State> States { get; set; }
+
 
     }
 }

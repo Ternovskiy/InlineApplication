@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataModulEntety.Model;
 using Interfaces;
 using Interfaces.Models;
 
@@ -21,27 +22,22 @@ namespace DataModulEntety
         {
             if (name != "")
             {
-                var pr = Db.Users
+                countPage = Db.Users.Count(f => f.FirstName.ToLower().Contains(name.ToLower()));
+                return Db.Users
                             .OrderBy(p => p.idUser)
-                            .Where(f=>f.LastName.ToLower().Contains(name.ToLower()))
+                            .Where(f => f.FirstName.ToLower().Contains(name.ToLower()) && f.State.Name == "В работе")
                             .Skip(pageSize * (page - 1)).Take(pageSize);
-
-                countPage = Db.Users.Count(f => f.LastName.ToLower().Contains(name.ToLower()));
-
-                return pr;
             }
-            else
-            {
-                var pr = Db.Users.OrderBy(p => p.idUser).Skip(pageSize * (page - 1)).Take(pageSize);
 
-                countPage = Db.Users.Count();
+            var pr = Db.Users.Where(f => f.State.Name == "В работе");
+            countPage = pr.Count();
+            return pr.OrderBy(p => p.idUser).Skip(pageSize * (page - 1)).Take(pageSize); ;
 
-                return pr;
-            }
         }
 
-        public AUser GerUser(int idUser)
+        public AUser GerUser(int idUser = -1)
         {
+            if (idUser == -1) return new User();
             return Db.Users.First(u => u.idUser == idUser);
         }
     }

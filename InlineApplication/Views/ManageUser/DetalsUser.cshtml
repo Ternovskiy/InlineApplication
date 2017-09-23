@@ -8,35 +8,33 @@
 </script>
 
 
-<h3 class="text-center"><strong> @Model.FirstName </strong></h3>
+<h3 class="text-center"><strong> @Model.ToString() </strong></h3>
 
 <div class="row">
     <img class="img-rounded" src="@ViewBag.img" align="left" style="margin-right: 50px" />
    
-
-   
     <h4>@Html.DisplayNameFor(m => Model.FirstName): @Model.FirstName</h4>
+    <h4>@Html.DisplayNameFor(m => Model.LastName): @Model.LastName</h4>
+    <h4>@Html.DisplayNameFor(m => Model.MiddleName): @Model.MiddleName</h4>
+    <h4>@Html.DisplayNameFor(m => Model.Email): @Model.Email</h4>
     
-
-    
-    <button class="btn btn-success center-block" onclick="AddMerchandiseForOrder(@Model.LastName)">del edit</button>
+    <button class="btn btn-success" onclick="AddMerchandiseForOrder(@Model.LastName)">Редактировать</button>
 
 </div>
 
 
-
-<div class="panel-group" id="accordion2">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title" align="center">
-                <a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2">Подписки</a>
-            </h4>
-        </div>
-        <div id="collapseOne2" class="panel-collapse collapse">
-            <div class="panel-body">
-
-                <div id="detalsMerchComents"></div>
-
+<div class="row" style="margin-top: 10px">
+    <div class="panel-group" id="accordion2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title" align="center">
+                    <a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2">Подписки</a>
+                </h4>
+            </div>
+            <div id="collapseOne2" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div id="detalsMerchComents"></div>
+                </div>
             </div>
         </div>
     </div>

@@ -3,7 +3,7 @@
 <script>
     $(function () {
 
-        @*$("#detalsMerchComents").load('@Url.Action("GetComments","Rating")', {idMerch:@Model.Id});*@
+        $("#detalsUserNotices").load('@Url.Action("GetUserNotices","ManageUser")', { idUser:@Model.idUser});
     });
 
     function EditUser(i) {
@@ -51,17 +51,19 @@
 </div>
 
 
-<div class="row" style="margin-top: 10px">
+<div class="row" style="margin-top: 11px">
     <div class="panel-group" id="accordion2">
         <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title" align="center">
-                    <a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2">Подписки</a>
-                </h4>
+            <div class="panel-heading" style="padding: 0">
+                <div class="panel-title" align="center" >
+                    <a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2" class="btn btn-block">
+                        <h3 style="margin: 3px;"><small>Подписки </small></h3>
+                    </a>
+                </div>
             </div>
             <div id="collapseOne2" class="panel-collapse collapse">
                 <div class="panel-body">
-                    <div id="detalsMerchComents"></div>
+                    <div id="detalsUserNotices"></div>
                 </div>
             </div>
         </div>

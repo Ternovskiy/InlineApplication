@@ -234,6 +234,7 @@
     <Content Include="Views\ManageNotice\Create.cshtml" />
     <Content Include="Views\ManageNotice\Edit.cshtml" />
     <Content Include="Views\ManageNotice\Delete.cshtml" />
+    <Content Include="Views\ManageUser\GetUserNotices.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

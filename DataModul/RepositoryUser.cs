@@ -56,5 +56,10 @@ namespace DataModul
         {
             throw new NotImplementedException();
         }
+
+        public bool SaveUserNotices(int userId, int noticeId, bool signed)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

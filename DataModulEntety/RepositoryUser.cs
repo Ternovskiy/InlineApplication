@@ -77,5 +77,27 @@ namespace DataModulEntety
             return Db.Users.First(_ => _.idUser == userId)
                 .Notices.Where(_ => _.idState == 1);
         }
+
+        public bool SaveUserNotices(int userId, int noticeId, bool signed)
+        {
+            var user=Db.Users.First(u => u.idUser == userId);
+            var notice = Db.Notices.First(n => n.idNotice == noticeId);
+            if (signed)
+            {
+                
+                if (!notice.Users.Any(u => u.idUser == userId))
+                {
+                    notice.Users.Add(user);
+                    Db.SaveChanges();
+                }
+                return true;
+            }
+            if (notice.Users.Any(u => u.idUser == userId))
+            {
+                notice.Users.Remove(user);
+                Db.SaveChanges();
+            }
+            return true;
+        }
     }
 }

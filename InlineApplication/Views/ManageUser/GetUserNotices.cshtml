@@ -1,0 +1,38 @@
+﻿@model IEnumerable<InlineApplication.Models.ViewUserNotice>
+
+<script>
+
+    function NoticeSignedChange(signed,noticeId) {
+
+        $.post(
+            "@Url.Action("SaveUserNotice")",
+            {
+                userId: @ViewBag.UserId,
+                noticeId: noticeId,
+                signed: signed
+            }
+        );
+    }
+
+</script>
+
+@foreach (var item in Model)
+{
+
+    <div class="navbar-default" >
+        <h3 style="margin: 5px;">
+            @if (item.Signed)
+            {
+            <input type="checkbox" checked="checked" style="margin-left: 10px; margin-right: 5px;" onchange="NoticeSignedChange(this.checked, @item.Notice.idNotice)"/>
+            }
+            else
+            {
+            <input type="checkbox" style="margin-left: 10px; margin-right: 5px;" onchange="NoticeSignedChange(this.checked, @item.Notice.idNotice)"/>
+            }
+            <small> @item.Notice.Name</small>
+        </h3>
+    </div>
+
+
+}
+

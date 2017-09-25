@@ -3,25 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using Interfaces.Models.Notice;
 
 namespace InlineApplication.Models
 {
-    [MetadataType(typeof(ModelViewUser))]
-    public abstract partial class AUser
+    public class ViewUserNotice
     {
-
-    }
-
-    class ModelViewUser
-    {
-        [Display(Name = "Имя")]
-        public string FirsName { get; set; }
-        [Display(Name = "Фамилия")]
-        public string LastName { get; set; }
-        [Display(Name = "Отчество")]
-        public string MiddleName { get; set; }
-        [Display(Name = "E-mail")]
-        public string Email { get; set; }
-
+        public Notice Notice { get; set; }
+        public bool Signed { get; set; }
     }
 }

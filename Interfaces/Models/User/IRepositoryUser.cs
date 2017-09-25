@@ -36,6 +36,21 @@ namespace Interfaces.Models.User
         bool Remove(int userId);
 
 
+        /// <summary>
+        /// Получить подписки пользователя
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         IEnumerable<Notice.Notice> GetUserNotices(int userId);
+
+
+        /// <summary>
+        /// добавить или удалить подписку пользователю
+        /// </summary>
+        /// <param name="userId">ид польз</param>
+        /// <param name="noticeId">ид уведомления</param>
+        /// <param name="signed">тру- добавить подп.польз., фалс-удалить у польз. подп.</param>
+        /// <returns></returns>
+        bool SaveUserNotices(int userId, int noticeId, bool signed);
     }
 }

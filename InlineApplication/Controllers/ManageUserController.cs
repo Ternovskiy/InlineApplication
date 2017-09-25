@@ -4,8 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DataModul;
+using InlineApplication.Models;
 using Interfaces;
 using Interfaces.Models;
+using Interfaces.Models.Notice;
 using Interfaces.Models.User;
 
 namespace InlineApplication.Controllers
@@ -63,6 +65,21 @@ namespace InlineApplication.Controllers
             return PartialView(Repository.GerUser(idUser));
         }
 
+
+        public ActionResult GetUserNotices(int idUser)
+        {
+            var s=Repository.GetUserNotices(idUser);
+            var r = ((IRepositoryNotice) Repository)
+                .GetNotices()
+                .Select(n => new ViewUserNotice() { Notice = n, Signed = s.Any(_=>_.idNotice==n.idNotice) });
+            ViewBag.UserId = idUser;
+            return PartialView(r);
+        }
+
+        public void SaveUserNotice(int userId, int noticeId, bool signed)
+        {
+            Repository.SaveUserNotices(userId, noticeId, signed);
+        }
 
         
         public ActionResult EditUser(int idUser=-1)

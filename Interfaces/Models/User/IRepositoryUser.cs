@@ -20,5 +20,19 @@ namespace Interfaces.Models.User
         /// <param name="idUser"></param>
         /// <returns></returns>
         AUser GerUser(int idUser=-1);
+
+        /// <summary>
+        /// сохраняет, создает пользователей
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        bool Save(AUser user);
+
+        /// <summary>
+        /// сменит статус польз на "удален" по ид
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        bool Remove(int userId);
     }
 }

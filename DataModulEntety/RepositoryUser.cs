@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ using Interfaces.Models;
 
 namespace DataModulEntety
 {
-    public class RepositoryEntety : IRepository
+    public partial class RepositoryEntety : IRepository
     {
         public RepositoryEntety(string conStr)
         {
@@ -39,6 +40,35 @@ namespace DataModulEntety
         {
             if (idUser == -1) return new User();
             return Db.Users.First(u => u.idUser == idUser);
+        }
+
+        public bool Save(AUser user)
+        {
+            if (user.idUser == 0)
+            {
+                var u=new User(user);
+                Db.Users.Add(u);
+            }
+            else
+            {
+                var u = Db.Users.First(_ => _.idUser == user.idUser);
+                if (u == null) return false;
+                u.FirstName = user.FirstName;
+                u.LastName = user.LastName;
+                u.MiddleName = user.MiddleName;
+                u.Email = user.Email;
+            }
+                Db.SaveChanges();
+                return true;
+        }
+
+        public bool Remove(int userId)
+        {
+            var u = Db.Users.First(_ => _.idUser == userId);
+            if (u == null) return false;
+            u.idState = 2;
+            Db.SaveChanges();
+            return true;
         }
     }
 }

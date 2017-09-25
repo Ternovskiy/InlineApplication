@@ -228,10 +228,15 @@
     <Content Include="Views\ManageUser\Index.cshtml" />
     <Content Include="Views\ManageUser\SearchUser.cshtml" />
     <Content Include="Views\ManageUser\DetalsUser.cshtml" />
+    <Content Include="Views\ManageUser\EditUser.cshtml" />
+    <Content Include="Views\ManageUser\CreateUser.cshtml" />
+    <Content Include="Views\ManageNotice\Index.cshtml" />
+    <Content Include="Views\ManageNotice\Create.cshtml" />
+    <Content Include="Views\ManageNotice\Edit.cshtml" />
+    <Content Include="Views\ManageNotice\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ManageNotice\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

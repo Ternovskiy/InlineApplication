@@ -10,6 +10,8 @@
     
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    
+
     @RenderSection("scripts", required: false)
 
 </head>
@@ -22,15 +24,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Имя приложения", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Рассылка уведомлений", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Рассылка уведомлений", "Index", "Home")</li>
                     <li>@Html.ActionLink("Управление персоналом", "Index", "ManageUser")</li>
-                    <li>@Html.ActionLink("О программе", "About", "Home")</li>
-                    <li>@Html.ActionLink("Контакт", "Contact", "Home")</li>
-                </ul>
+                    <li>@Html.ActionLink("Управление уведомлениями", "Index", "ManageNotice")</li>
+                    </ul>
             </div>
         </div>
     </div>
@@ -38,7 +38,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year – приложение ASP.NET</p>
+            <p>&copy; @DateTime.Now.Year – рассылка уведомлений</p>
         </footer>
     </div>
 

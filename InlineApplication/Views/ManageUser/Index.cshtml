@@ -3,18 +3,20 @@
     function ClickPageUser(i) {
         var name = $('#searchUserText').val();
         name = name.replace(new RegExp(" ", 'g'), "%20");
-        var pp = $("#countPageUser").val(); 
-        $('#searchUser').load('@Url.Action("SearchUser")', { name: name,  pageSize: pp, page: i });   
+        var pp = $("#countPageUser").val();
+        $('#searchUser').load('@Url.Action("SearchUser")', { name: name,  pageSize: pp, page: i });
     }
 
 
     $(document).ready(function () {
         ClickPageUser(1);
         $("#countPageUser").change(function() {
-            ClickPageUser(1);
+                ClickPageUser(1);
             }
         );
     });
+
+
 </script>
 
 
@@ -34,26 +36,44 @@
             @{
                 var sl = new List<SelectListItem>()
                 {
-                    new SelectListItem(){Selected = true,Text = "по 10",Value = "10"},
+                    new SelectListItem(){Text = "по 10",Value = "10"},
                     new SelectListItem(){Text = "по 5",Value = "5"},
                     new SelectListItem(){Text = "по 3",Value = "3"}
                 };
+                if (ViewBag.pageSize == 5) { sl[1].Selected = true; }
+                else
+                {
+                    if (ViewBag.pageSize == 3) { sl[2].Selected = true; }
+                    else
+                    {
+                        sl[0].Selected = true;
+                    }
+                }
             }
             <div class="col-md-3">
                 @Html.DropDownList(name: "pp", selectList: sl, htmlAttributes: new { @class = "form-control", id = "countPageUser" })
             </div>
 
         </div>
-        <br/>
+        <br />
         <div id="searchUser">
-            
+
         </div>
     </div>
-        
 
-    <div id="detalsUser" class="col-md-7">
+    <div class="col-md-7">
+        <script>
+            function CreateUser() {
+                $('#detalsUser').load('@Url.Action("CreateUser")');
         
-        
+            }
+        </script>
+        <div class="row">
+            <button class="btn btn-default" onclick="CreateUser()">Создать</button>
+        </div>
 
+        <div id="detalsUser">
+
+        </div>
     </div>
 </div>

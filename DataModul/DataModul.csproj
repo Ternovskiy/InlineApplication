@@ -43,7 +43,8 @@
   <ItemGroup>
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository.cs" />
+    <Compile Include="RepositoryUser.cs" />
+    <Compile Include="RepositoryNotice.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Interfaces\_Interfaces.csproj">

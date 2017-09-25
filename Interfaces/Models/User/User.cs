@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace Interfaces.Models
 {
 
     #region Интерфейс
 
-    interface IUser
+     interface IUser
     {
 
         int idUser { get; set; }
@@ -19,7 +20,7 @@ namespace Interfaces.Models
 
     #region Модель
 
-    public abstract partial class AUser : IUser
+    public  partial class AUser : IUser
     {
 
         public virtual int idUser { get; set; }
@@ -41,7 +42,7 @@ namespace Interfaces.Models
     #region Мета данные
 
     [MetadataType(typeof(ModelViewUser))]
-    public abstract partial class AUser
+    public  partial class AUser
     {
 
     }
@@ -50,18 +51,24 @@ namespace Interfaces.Models
     {
 
         //[Key]
-        //public int idUser { get; set; }
+        [HiddenInput(DisplayValue = false)]
+        public int idUser { get; set; }
 
         [Display(Name = "Имя")]
+        [Required(ErrorMessage = "Введите имя")]
         public string FirstName { get; set; }
 
         [Display(Name = "Фамилия")]
+        [Required(ErrorMessage = "Введите фамилию")]
         public string LastName { get; set; }
 
         [Display(Name = "Отчество")]
+        [Required(ErrorMessage = "Введите отчество")]
         public string MiddleName { get; set; }
 
         [Display(Name = "E-mail")]
+        [Required(ErrorMessage = "Введите адрес почты")]
+        [EmailAddress(ErrorMessage = "Не корректный адрес почты")]
         public string Email { get; set; }
 
     }

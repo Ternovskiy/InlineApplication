@@ -9,7 +9,7 @@ using Interfaces.Models;
 
 namespace DataModul
 {
-    public class Repository: IRepository
+    public partial class Repository: IRepository
     {
         public Repository(string conStr)
         {
@@ -39,6 +39,16 @@ namespace DataModul
         public AUser GerUser(int idUser)
         {
             return new User() { idUser = idUser, Email = "user"+ idUser, FirstName = "user", LastName = "user", MiddleName = "user" };
+        }
+
+        public bool Save(AUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Remove(int userId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

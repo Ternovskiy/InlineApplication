@@ -11,7 +11,20 @@ namespace DataModulEntety.Model
 {
     public class User  :AUser
     {
+        public User()
+        {
+            
+        }
 
+        public User(AUser user)
+        {
+            idUser = user.idUser;
+            FirstName= user.FirstName;
+            LastName = user.LastName;
+            MiddleName = user.MiddleName;
+            Email = user.Email;
+            idState = 1;
+        }
 
         [Key]
         public override int idUser { get; set; }
@@ -20,6 +33,9 @@ namespace DataModulEntety.Model
 
         public int idState { get; set; }
 
+
         public State State { get; set; }
+
+        public List<NoticeEntety> Notices { get; set; }
     }
 }

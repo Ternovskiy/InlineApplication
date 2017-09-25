@@ -1,0 +1,51 @@
+﻿@model Interfaces.Models.AUser
+<h3 class="text-center"><strong>Создание пользователя</strong></h3>
+<div class="row">
+
+    <table>
+        <tr>
+            <td valign="top">
+                <img class="img-rounded" src="@ViewBag.img" style="margin-right: 50px" />
+            </td>
+            <td>
+                <div id="dataEdit">
+                    
+                    @using (Html.BeginForm("SaveUser", "ManageUser", FormMethod.Post))
+                    {
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(user => user.idUser)
+
+                        <div class="form-group">
+                            @*@Html.DisplayNameFor(m => Model.FirstName)*@
+                            @Html.LabelFor(user => user.FirstName, htmlAttributes: new { @class = "control-label" })
+                            @Html.TextBoxFor(user => user.FirstName, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(user => user.FirstName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+        
+                            @Html.LabelFor(user => user.LastName, htmlAttributes: new { @class = "control-label" })
+                            @Html.TextBoxFor(user => user.LastName, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(user => user.LastName)
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(user => user.MiddleName, htmlAttributes: new { @class = "control-label" })
+                            @Html.TextBoxFor(user => user.MiddleName, htmlAttributes: new { @class = "form-control" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(user => user.Email, htmlAttributes: new { @class = "control-label" })
+                            @Html.TextBoxFor(user => user.Email, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(user => user.Email)
+                        </div>
+
+                        <button class="btn btn-success" type="submit">Сохранить</button>
+                        }
+                </div>
+
+            </td>
+        </tr>
+
+    </table>
+</div>

@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using DataModul;
 using Interfaces;
+using Interfaces.Models;
+using Interfaces.Models.User;
 
 namespace InlineApplication.Controllers
 {
@@ -15,7 +17,8 @@ namespace InlineApplication.Controllers
             Repository = repository;
         }
 
-        public IRepository Repository { get; set; }
+        public IRepositoryUser Repository { get; set; }
+
 
 
         /// <summary>
@@ -24,6 +27,7 @@ namespace InlineApplication.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
+
             return View();
         }
 
@@ -60,85 +64,39 @@ namespace InlineApplication.Controllers
         }
 
 
-
-
-
-
-
-        #region dhsfjahsdfjhasdjkfhasdjkfh
-
-        // GET: ManageUser/Details/5
-        public ActionResult Details(int id)
+        
+        public ActionResult EditUser(int idUser=-1)
         {
-            return View();
+            ViewBag.btnRetunn = true;
+            return PartialView(Repository.GerUser(idUser));
         }
 
-        // GET: ManageUser/Create
-        public ActionResult Create()
+        public ActionResult CreateUser()
         {
-            return View();
+            var r = new Random();
+            ViewBag.img = @"/Content/img/" + r.Next(1, 5) + ".png";
+            return PartialView(Repository.GerUser());
         }
 
-        // POST: ManageUser/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult SaveUser(AUser user)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                Repository.Save(user);
+                return View("Index");
             }
-            catch
-            {
-                return View();
-            }
+            ViewBag.btnRetunn = false;
+            return View("EditUser",user);
         }
 
-        // GET: ManageUser/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
-        // POST: ManageUser/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult RemoveUser(int idUser)
         {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            Repository.Remove(idUser);
+            return View("Index");
         }
-
-        // GET: ManageUser/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ManageUser/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        #endregion
+        
     }
 }

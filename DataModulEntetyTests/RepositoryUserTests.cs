@@ -108,5 +108,41 @@ namespace DataModulEntetyTests
 
             Assert.AreEqual(u.idUser, 3);
         }
+
+        [TestMethod]
+        public void UserSaveTest()
+        {
+            int count = 0;
+
+            Repository.GetUsers("", 1,1,ref count);
+            var u=Repository.GerUser();
+            u.FirstName = "testFN";
+            u.LastName = "LN";
+            u.MiddleName = "MN";
+            u.Email = "t@t.t";
+            Repository.Save(u);
+
+            var count2=0;
+            Repository.GetUsers("", 1,1,ref count2);
+            Assert.AreEqual(count+1,count2);
+        }
+
+
+        [TestMethod]
+        public void UserEditTest()
+        {
+            var u = Repository.GerUser(10);
+            u.FirstName = "edit";
+            u.LastName = "editLN";
+            u.MiddleName = "editMN";
+            u.Email = "edit@t.t";
+            Repository.Save(u);
+        }
+
+        [TestMethod]
+        public void UserRemove()
+        {
+            Repository.Remove(10);
+        }
     }
 }

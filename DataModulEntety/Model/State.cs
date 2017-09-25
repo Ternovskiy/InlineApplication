@@ -10,11 +10,13 @@ namespace DataModulEntety.Model
     public class State
     {
 
-        public   List<User> Users { get; set; }
 
         [Key]
         public int idState { get; set; }
 
         public string Name { get; set; }
+
+
+        public   List<User> Users { get; set; }
     }
 }

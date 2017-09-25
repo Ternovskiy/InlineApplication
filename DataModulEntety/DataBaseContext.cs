@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataModulEntety.Model;
+using Interfaces.Models.Notice;
 
 namespace DataModulEntety
 {
@@ -20,6 +21,6 @@ namespace DataModulEntety
 
         public DbSet<State> States { get; set; }
 
-
+        public DbSet<NoticeEntety> Notices { get; set; }
     }
 }

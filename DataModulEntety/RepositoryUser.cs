@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using DataModulEntety.Model;
 using Interfaces;
 using Interfaces.Models;
+using Interfaces.Models.Notice;
 
 namespace DataModulEntety
 {
@@ -69,6 +70,12 @@ namespace DataModulEntety
             u.idState = 2;
             Db.SaveChanges();
             return true;
+        }
+
+        public IEnumerable<Notice> GetUserNotices(int userId)
+        {
+            return Db.Users.First(_ => _.idUser == userId)
+                .Notices.Where(_ => _.idState == 1);
         }
     }
 }

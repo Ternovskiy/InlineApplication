@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DataModul.Models;
 using Interfaces;
 using Interfaces.Models;
+using Interfaces.Models.Notice;
 
 namespace DataModul
 {
@@ -47,6 +48,11 @@ namespace DataModul
         }
 
         public bool Remove(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Notice> GetUserNotices(int userId)
         {
             throw new NotImplementedException();
         }

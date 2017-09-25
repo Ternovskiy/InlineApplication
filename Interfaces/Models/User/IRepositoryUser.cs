@@ -34,5 +34,8 @@ namespace Interfaces.Models.User
         /// <param name="userId"></param>
         /// <returns></returns>
         bool Remove(int userId);
+
+
+        IEnumerable<Notice.Notice> GetUserNotices(int userId);
     }
 }

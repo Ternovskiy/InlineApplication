@@ -10,7 +10,7 @@ namespace DataModulEntety.Model
     {
         public NoticeEntety()
         {
-            
+            this.Users = new HashSet<User>();
         }
 
         public NoticeEntety(Notice notice)
@@ -25,6 +25,6 @@ namespace DataModulEntety.Model
 
         public int idState { get; set; }
 
-        public List<User> Users { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

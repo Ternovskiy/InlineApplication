@@ -74,19 +74,43 @@ namespace DataModulEntetyTests
 
             //Console.WriteLine(Db.Users.First(_ => _.idUser == 5).idState);
 
-            //foreach (var u in Db.States.First(_ => _.idState == 2).Users)
+            //var r=Db.Users.ToList();
+
+            //foreach (var u in Db.States.First(_ => _.idState == 2).Notices)
             //{
             //    Console.WriteLine(u);
             //}
 
             //var s= Db.States.ToList();
 
-            var us = Db.Users.First(_ => _.idUser == 5);
+            //var us = Db.Users.First(_ => _.idUser == 5);
 
-            Console.WriteLine(us);
-            Console.WriteLine(us.State.Name);
+            //Console.WriteLine(us);
+            //Console.WriteLine(us.State.Name);
 
             //Console.WriteLine(Db.Users.First(_ => _.idUser == 5).State.Name);
+
+
+
+
+
+
+
+            var u = Db.Users.First(_ => _.idUser == 3);
+            Console.WriteLine(u.State.Name);
+            var nu = u.Notices;
+            foreach (var item in nu)
+            {
+                Console.WriteLine(item.Name);
+            }
+
+
+
+            //var n = Db.Notices.First(_ => _.idNotice == 1);
+
+            //Db.Users.First(_ => _.idUser == 3).Notices.Add(n);
+
+            //Db.SaveChanges();
 
         }
 
@@ -143,6 +167,15 @@ namespace DataModulEntetyTests
         public void UserRemove()
         {
             Repository.Remove(10);
+        }
+
+
+        [TestMethod]
+        public void TestGetUserNitoces()
+        {
+            var un = Repository.GetUserNotices(3);
+
+            Assert.AreEqual(1,un.Count());
         }
     }
 }

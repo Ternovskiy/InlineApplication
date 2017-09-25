@@ -9,7 +9,11 @@ namespace DataModulEntety.Model
 {
     public class State
     {
-
+        public State()
+        {
+            Users=new HashSet<User>();
+            Notices=new HashSet<NoticeEntety>();
+        }
 
         [Key]
         public int idState { get; set; }
@@ -17,6 +21,7 @@ namespace DataModulEntety.Model
         public string Name { get; set; }
 
 
-        public   List<User> Users { get; set; }
+        public virtual  ICollection<User> Users { get; set; }
+        public virtual ICollection<NoticeEntety> Notices { get; set; }
     }
 }

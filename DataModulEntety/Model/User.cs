@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace DataModulEntety.Model
     {
         public User()
         {
-            
+            this.Notices = new HashSet<NoticeEntety>();
         }
 
         public User(AUser user)
@@ -28,14 +29,10 @@ namespace DataModulEntety.Model
 
         [Key]
         public override int idUser { get; set; }
-
-
-
         public int idState { get; set; }
 
 
-        public State State { get; set; }
-
-        public List<NoticeEntety> Notices { get; set; }
+        public virtual State State { get; set; }
+        public virtual ICollection<NoticeEntety> Notices { get; set; }
     }
 }

@@ -72,10 +72,10 @@ namespace InlineApplication.App_Start
 
             //todo не все методы реализованы
             //для использования низк. ур. запросов
-            kernel.Bind<IRepository>().ToMethod(_ => new Repository(conStr));
+            //kernel.Bind<IRepository>().ToMethod(_ => new Repository(conStr));
 
             //для использования ентити
-            //kernel.Bind<IRepository>().ToMethod(_ => new RepositoryEntety(conStr));
+            kernel.Bind<IRepository>().ToMethod(_ => new RepositoryEntety(conStr));
 
 
             //это для отправки уведомлени, работает долго, иногда выкидывает исключение

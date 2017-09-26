@@ -13,23 +13,26 @@ namespace InlineApplication.Controllers
     public class HomeController : Controller
     {
 
-        public HomeController(IRepository repository)
+        public HomeController(IRepository repository, ISendingNotice sendingNotice)
         {
             Repository = repository;
+            SendingNotice = sendingNotice;
         }
         private IRepositoryNotice Repository { get; }
+        private ISendingNotice SendingNotice { get; }
+
+
 
         public ActionResult Index()
         {
-            IEnumerable<NoticeSendView> n = Repository.GetNoticeSendView();
-            return View();
+            return View(Repository.GetNoticeSendView());
         }
 
 
 
         public async Task<string> SendNotice(int noticeId)
         {
-            await Repository.SendMessage(noticeId);
+            await Repository.SendMessage(noticeId, SendingNotice);
             return DateTime.Now.ToString();
         }
     }

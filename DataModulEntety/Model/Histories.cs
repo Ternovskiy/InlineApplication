@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataModulEntety.Model
 {
@@ -7,6 +8,7 @@ namespace DataModulEntety.Model
     {
         [Key]
         public int idHistory { get; set; }
+        [Column(TypeName = "datetime")]
         public DateTime Date { get; set; }
         public string Comment { get; set; }
         public int idNotice { get; set; }

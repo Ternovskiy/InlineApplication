@@ -73,6 +73,8 @@ namespace InlineApplication.App_Start
 
             //kernel.Bind<IRepository>().ToMethod(_ => new Repository(conStr));
             kernel.Bind<IRepository>().ToMethod(_ => new RepositoryEntety(conStr));
+
+            kernel.Bind<ISendingNotice>().ToMethod(_ => new SendingNotice.SendingNoticeClass());
         }        
     }
 }

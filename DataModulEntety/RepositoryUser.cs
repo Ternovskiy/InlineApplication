@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using DataModulEntety.Model;
 using Interfaces;
@@ -100,9 +101,47 @@ namespace DataModulEntety
             return true;
         }
 
-        public Task SendMessage(int noticeId)
+        public  Task SendMessage(int noticeId, ISendingNotice sendingNotice)
         {
-            throw new NotImplementedException();
+            return Task.Factory.StartNew(()=>
+            {
+                var notice =Db.Notices.First(n=>n.idNotice==noticeId);
+                var users = notice.Users.Where(u => u.idState == 1);
+                var locker = new object();
+                Parallel.ForEach(users, ((user, state) =>
+                {
+                    try
+                    {
+                        sendingNotice.Send(notice, user);
+                        lock (locker)
+                        {
+                            Db.Histories.Add(new Histories()
+                            {
+                                idNotice = noticeId,
+                                idState = 3,
+                                idUser = user.idUser,
+                                Date = DateTime.Now
+                            });
+                            Db.SaveChanges();
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        lock (locker)
+                        {
+                            Db.Histories.Add(new Histories()
+                            {
+                                idNotice = noticeId,
+                                idState = 4,
+                                Comment = e.Message,
+                                idUser = user.idUser,
+                                Date = DateTime.Now
+                            });
+                            Db.SaveChanges();
+                        }
+                    }
+                }));
+            });
         }
     }
 }

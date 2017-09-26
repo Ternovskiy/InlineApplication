@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Interfaces;
 using Interfaces.Models.Notice;
 
 namespace DataModul
@@ -26,6 +28,11 @@ namespace DataModul
         }
 
         public IEnumerable<NoticeSendView> GetNoticeSendView()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task SendMessage(int noticeId, ISendingNotice sendingNotice)
         {
             throw new System.NotImplementedException();
         }

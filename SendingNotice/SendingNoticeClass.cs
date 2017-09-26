@@ -10,7 +10,7 @@ using Interfaces.Models.Notice;
 
 namespace SendingNotice
 {
-    public class SendingNotice:ISendingNotice
+    public class SendingNoticeClass:ISendingNotice
     {
         public bool Send(Notice notice, AUser user)
         {
@@ -20,8 +20,8 @@ namespace SendingNotice
             Thread.Sleep(sleep);
 
 
-            var exeption = random.Next(0, 10);
-            if(exeption==5)throw new Exception("Удаленный сервис не смог отправить уведомление");
+            var exeption = random.Next(0, 100);
+            if(exeption>70)throw new Exception("Удаленный сервис не смог отправить уведомление");
 
             return true;
         }

@@ -1,0 +1,23 @@
+﻿@model Interfaces.Models.Notice.NoticeSendView
+
+@{
+    string d = Model.DataLastSended == new DateTime() ? " Не рассылалось" : Model.DataLastSended.ToString();
+
+}
+
+<script>
+    function SendNotice() {
+        $("#dataSend").text = "Рассылается...";
+    }
+</script>
+
+<tr>
+    <td>
+        @Html.DisplayFor(m => Model.Name)
+    </td>
+
+    <td id="dataSend">@d</td>
+    <td>
+        <button class="btn btn-default" onclick="SendNotice()">Разослать</button>
+    </td>
+</tr>

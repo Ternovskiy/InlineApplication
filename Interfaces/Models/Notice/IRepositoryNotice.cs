@@ -43,7 +43,8 @@ namespace Interfaces.Models.Notice
         /// запустит асинхронною рассылку уведомелений
         /// </summary>
         /// <param name="noticeId"></param>
+        /// <param name="sendingNotice"></param>
         /// <returns></returns>
-        Task SendMessage(int noticeId);
+        Task SendMessage(int noticeId, ISendingNotice sendingNotice);
     }
 }

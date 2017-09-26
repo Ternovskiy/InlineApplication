@@ -222,8 +222,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\ManageUser\Index.cshtml" />
     <Content Include="Views\ManageUser\SearchUser.cshtml" />
@@ -235,6 +233,7 @@
     <Content Include="Views\ManageNotice\Edit.cshtml" />
     <Content Include="Views\ManageNotice\Delete.cshtml" />
     <Content Include="Views\ManageUser\GetUserNotices.cshtml" />
+    <Content Include="Views\Home\NoticeSendView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -254,6 +253,10 @@
     <ProjectReference Include="..\Interfaces\_Interfaces.csproj">
       <Project>{623547e1-d44b-4860-98dc-698fc1f64bbd}</Project>
       <Name>_Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SendingNotice\SendingNotice.csproj">
+      <Project>{457fdc7c-d30e-45cf-9dec-587857e63585}</Project>
+      <Name>SendingNotice</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

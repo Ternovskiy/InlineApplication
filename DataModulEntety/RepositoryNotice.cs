@@ -48,6 +48,17 @@ namespace DataModulEntety
             return true;
         }
 
-
+        public IEnumerable<NoticeSendView> GetNoticeSendView()
+        {
+            return Db.Notices
+                .Where(n => n.idState == 1)
+                .Select(vn => new NoticeSendView()
+                {
+                    idNotice = vn.idNotice,
+                    Name = vn.Name,
+                    DataLastSended = vn.Histories.Max(h => h.Date) == null?new DateTime() : vn.Histories.Max(h => h.Date)
+                });
+            
+        }
     }
 }

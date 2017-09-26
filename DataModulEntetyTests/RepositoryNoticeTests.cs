@@ -23,6 +23,19 @@ namespace DataModulEntetyTests
         }
 
 
+        [TestMethod]
+        public void TestGetViewSendNotice()
+        {
+            var n = Repository.GetNoticeSendView();
 
+            foreach (NoticeSendView item in n)
+            {
+                
+                var d = item.DataLastSended ==new DateTime() ? "null" : item.DataLastSended.ToString();
+                var s = $"{item.idNotice} - {item.Name} - {d}";
+                Console.WriteLine(s);
+            }
+
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Interfaces.Models.Notice
 {
@@ -29,5 +30,20 @@ namespace Interfaces.Models.Notice
         /// <param name="id"></param>
         /// <returns></returns>
         bool RemoveNotice(int id);
+        
+
+        /// <summary>
+        /// вернет список подписок и дату последней рассылки
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<NoticeSendView> GetNoticeSendView();
+
+
+        /// <summary>
+        /// запустит асинхронною рассылку уведомелений
+        /// </summary>
+        /// <param name="noticeId"></param>
+        /// <returns></returns>
+        Task SendMessage(int noticeId);
     }
 }

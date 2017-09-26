@@ -24,5 +24,10 @@ namespace DataModul
         {
             throw new System.NotImplementedException();
         }
+
+        public IEnumerable<NoticeSendView> GetNoticeSendView()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

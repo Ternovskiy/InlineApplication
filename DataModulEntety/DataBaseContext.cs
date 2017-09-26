@@ -24,7 +24,8 @@ namespace DataModulEntety
 
         public DbSet<NoticeEntety> Notices { get; set; }
 
-        
+        public DbSet<Histories> Histories { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()

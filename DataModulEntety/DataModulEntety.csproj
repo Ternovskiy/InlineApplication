@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBaseContext.cs" />
+    <Compile Include="Model\Histories.cs" />
     <Compile Include="Model\Notice.cs" />
     <Compile Include="Model\State.cs" />
     <Compile Include="Model\User.cs" />

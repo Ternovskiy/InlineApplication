@@ -99,5 +99,10 @@ namespace DataModulEntety
             }
             return true;
         }
+
+        public Task SendMessage(int noticeId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

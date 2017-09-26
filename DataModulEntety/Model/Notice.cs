@@ -11,6 +11,7 @@ namespace DataModulEntety.Model
         public NoticeEntety()
         {
             this.Users = new HashSet<User>();
+            this.Histories = new HashSet<Histories>();
         }
 
         public NoticeEntety(Notice notice)
@@ -25,6 +26,8 @@ namespace DataModulEntety.Model
 
         public int idState { get; set; }
 
+        public virtual State States { get; set; }
         public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<Histories> Histories { get; set; }
     }
 }

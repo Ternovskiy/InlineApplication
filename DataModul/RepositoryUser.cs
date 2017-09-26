@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,52 +16,164 @@ namespace DataModul
     {
         public Repository(string conStr)
         {
-            
+            ConnectionString = conStr;
         }
 
+        private string ConnectionString { get; }
 
         public IEnumerable<AUser> GetUsers(string name, int pageSize, int page, ref int countPage)
         {
-            var users=new List<AUser>()
+            var users=new List<AUser>();
+            using (var conn = new SqlConnection(ConnectionString))
             {
-                new User(){idUser = 1,Email = "dsfsdf",FirstName = "dsfsd",LastName = "dsfsd",MiddleName = "dfd"},
-                new User(){idUser = 2,Email = "dsfggfgsdf",FirstName = "dgggsfsd",LastName = "dsggfsd",MiddleName = "dfgggd"},
-                new User(){idUser = 3,Email = "Email",FirstName = "FirstName",LastName = "LastName",MiddleName = "MiddleName"},
-                new User(){idUser =4 ,Email = "Email",FirstName = "FirstName",LastName = "LastName",MiddleName = "MiddleName"},
-                new User(){idUser = 5,Email = "Email",FirstName = "FirstName",LastName = "LastName",MiddleName = "MiddleName"},
-                new User(){idUser =6 ,Email = "Email",FirstName = "FirstName",LastName = "LastName",MiddleName = "MiddleName"},
-                new User(){idUser = 7,Email = "Email",FirstName = "FirstName",LastName = "LastName",MiddleName = "MiddleName"},
-                new User(){idUser = 8,Email = "Email",FirstName = "FirstName",LastName = "LastName",MiddleName = "MiddleName"},
-                new User(){idUser = 9,Email = "Email",FirstName = "FirstName",LastName = "LastName",MiddleName = "MiddleName"},
-                new User(){idUser = 10,Email = "Email",FirstName = "FirstName",LastName = "LastName",MiddleName = "MiddleName"},
-            };
-            countPage = users.Count;
-            return users.Skip(pageSize*(page-1)).Take(pageSize);
+                using (var cmd = conn.CreateCommand())
+                {
+                    //cmd.CommandText = @"EXEC GetUserPages		@name,	@pageSize,	@page,	@countPage";
+                    cmd.CommandText = @"GetUserPages";
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@pageSize", pageSize);
+                    cmd.Parameters.AddWithValue("@page", page);
+
+                    SqlParameter outputcountPage = cmd.Parameters.Add("@countPage", SqlDbType.Int);
+                    outputcountPage.Direction = ParameterDirection.Output;
+
+                    conn.Open();
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            users.Add(new AUser()
+                            {
+                                idUser = reader.GetInt32(0),
+                                FirstName = reader.GetString(1),
+                                LastName = reader.GetString(2),
+                                MiddleName = reader.GetString(3),
+                                Email = reader.GetString(4)
+                            });
+                        }
+                    }
+                    countPage = (int)outputcountPage.Value;
+                }
+            }
+            return users;
         }
 
         public AUser GerUser(int idUser)
         {
-            return new User() { idUser = idUser, Email = "user"+ idUser, FirstName = "user", LastName = "user", MiddleName = "user" };
+            var user = new User();
+            if (idUser == -1) return user;
+
+            using (var conn = new SqlConnection(ConnectionString))
+            {
+                using (var cmd = conn.CreateCommand())
+                {
+
+                    cmd.CommandText = @"select * from Users where idUser=@idUser";
+                    cmd.Parameters.AddWithValue("@idUser", idUser);
+                    conn.Open();
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            user.idUser = reader.GetInt32(0);
+                            user.FirstName = reader.GetString(1);
+                            user.LastName = reader.GetString(2);
+                            user.MiddleName = reader.GetString(3);
+                            user.Email = reader.GetString(4);
+                        }
+                    }
+                }
+            }
+            return user;
+
+            //return Db.Users.First(u => u.idUser == idUser);
         }
 
         public bool Save(AUser user)
         {
-            throw new NotImplementedException();
+            var i = 0;
+            using (var conn = new SqlConnection(ConnectionString))
+            {
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SaveUser";
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idUser", user.idUser);
+                    cmd.Parameters.AddWithValue("@FirstName", user.FirstName);
+                    cmd.Parameters.AddWithValue("@LastName", user.LastName);
+                    cmd.Parameters.AddWithValue("@MiddleName", user.MiddleName);
+                    cmd.Parameters.AddWithValue("@Email", user.Email);
+                    
+                    conn.Open();
+                    i=cmd.ExecuteNonQuery();
+                }
+            }
+            return i==1;
         }
 
         public bool Remove(int userId)
         {
-            throw new NotImplementedException();
+            var i = 0;
+            using (var conn = new SqlConnection(ConnectionString))
+            {
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"update Users set idState=2 where idUser=@idUser";
+                    cmd.Parameters.AddWithValue("@idUser", userId);
+                    conn.Open();
+                    i = cmd.ExecuteNonQuery();
+                }
+            }
+            return i == 1;
         }
 
         public IEnumerable<Notice> GetUserNotices(int userId)
         {
-            throw new NotImplementedException();
+            var notices=new List<Notice>();
+
+            using (var con=new SqlConnection(ConnectionString))
+            {
+                using (var cmd=con.CreateCommand())
+                {
+                    cmd.CommandText = @"select n.* from UserNotices un
+                                        join Notices n on un.idNotice=n.idNotice and n.idState=1 and un.idUser=@userId";
+                    cmd.Parameters.AddWithValue("@userId", userId);
+                    con.Open();
+                    using (var reader=cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            notices.Add(new Notice()
+                            {
+                                idNotice =reader.GetInt32(0),
+                                Name = reader.GetString(1)
+                            });
+                        }
+                    }
+                }
+            }
+            return notices;
         }
 
         public bool SaveUserNotices(int userId, int noticeId, bool signed)
         {
-            throw new NotImplementedException();
+            var i = 0;
+            using (var conn = new SqlConnection(ConnectionString))
+            {
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SaveUserNotices";
+                    cmd.CommandType=CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@userId", userId);
+                    cmd.Parameters.AddWithValue("@noticeId", noticeId);
+                    cmd.Parameters.AddWithValue("@signed", signed);
+                    conn.Open();
+                    i = cmd.ExecuteNonQuery();
+                }
+            }
+            return i == 1;
         }
     }
 }

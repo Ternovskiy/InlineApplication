@@ -76,6 +76,10 @@
       <Project>{F925D514-9FBC-436C-BB7B-9821DA66BE38}</Project>
       <Name>DataModulEntety</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DataModul\DataModul.csproj">
+      <Project>{71dc1830-1475-404b-b9a2-219cd8502ab4}</Project>
+      <Name>DataModul</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Interfaces\_Interfaces.csproj">
       <Project>{623547e1-d44b-4860-98dc-698fc1f64bbd}</Project>
       <Name>_Interfaces</Name>

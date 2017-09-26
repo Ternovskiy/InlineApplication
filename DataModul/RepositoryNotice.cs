@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Threading.Tasks;
 using Interfaces;
 using Interfaces.Models.Notice;
@@ -9,7 +10,28 @@ namespace DataModul
     {
         public IEnumerable<Notice> GetNotices()
         {
-            throw new System.NotImplementedException();
+            var notices = new List<Notice>();
+
+            using (var con = new SqlConnection(ConnectionString))
+            {
+                using (var cmd = con.CreateCommand())
+                {
+                    cmd.CommandText = @"select * from Notices where idState=1";
+                    con.Open();
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            notices.Add(new Notice()
+                            {
+                                idNotice = reader.GetInt32(0),
+                                Name = reader.GetString(1)
+                            });
+                        }
+                    }
+                }
+            }
+            return notices;
         }
 
         public bool Save(Notice notice)

@@ -25,7 +25,7 @@ namespace DataModulEntety
         {
             if (name != "")
             {
-                countPage = Db.Users.Count(f => f.FirstName.ToLower().Contains(name.ToLower()));
+                countPage = Db.Users.Count(f => f.FirstName.ToLower().Contains(name.ToLower()) && f.State.Name == "В работе");
                 return Db.Users
                             .OrderBy(p => p.idUser)
                             .Where(f => f.FirstName.ToLower().Contains(name.ToLower()) && f.State.Name == "В работе")

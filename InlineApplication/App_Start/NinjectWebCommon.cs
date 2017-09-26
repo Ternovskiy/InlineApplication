@@ -68,12 +68,17 @@ namespace InlineApplication.App_Start
 
             //var conStr = System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"]
             //    .ConnectionString;
-
             var conStr = Properties.Settings.Default.DefaultConnection;
 
-            //kernel.Bind<IRepository>().ToMethod(_ => new Repository(conStr));
-            kernel.Bind<IRepository>().ToMethod(_ => new RepositoryEntety(conStr));
+            //todo не все методы реализованы
+            //для использования низк. ур. запросов
+            kernel.Bind<IRepository>().ToMethod(_ => new Repository(conStr));
 
+            //для использования ентити
+            //kernel.Bind<IRepository>().ToMethod(_ => new RepositoryEntety(conStr));
+
+
+            //это для отправки уведомлени, работает долго, иногда выкидывает исключение
             kernel.Bind<ISendingNotice>().ToMethod(_ => new SendingNotice.SendingNoticeClass());
         }        
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using DataModul;
 using DataModulEntety;
 using DataModulEntety.Model;
 using Interfaces;
@@ -13,8 +14,8 @@ namespace DataModulEntetyTests
     {
         private const string conStr = @"Data Source=WS30\SRVWS30;Initial Catalog=Inline;Integrated Security=True";
 
-        //private IRepository Repository = new RepositoryEntety(conStr);
-        private IRepositoryUser Repository = new RepositoryEntety(conStr);
+        private IRepository Repository = new Repository(conStr);
+        //private IRepositoryUser Repository = new RepositoryEntety(conStr);
 
 
         [TestMethod()]
@@ -24,11 +25,14 @@ namespace DataModulEntetyTests
             var pr = Repository.GetUsers("", 10, 1, ref p).ToList();
 
 
-            Assert.AreEqual(5,p);
-            Assert.AreEqual(5,pr.Count());
+            //Assert.AreEqual(6,p);
+            // Assert.AreEqual(6,pr.Count());
 
 
-            //foreach (User user in pr)
+
+            //Console.WriteLine(p);
+
+            //foreach (var  user in pr)
             //{
             //    Console.WriteLine(user.idUser);
             //    Console.WriteLine(user.FirstName);
@@ -43,10 +47,16 @@ namespace DataModulEntetyTests
             int p = 0;
             var pr = Repository.GetUsers("Ивано", 10, 1, ref p).ToList();
 
+            Console.WriteLine(p);
+            Console.WriteLine(pr.Count());
+            Assert.AreEqual(1, p);
+            Assert.AreEqual(1, pr.Count());
 
-            Assert.AreEqual(2, p);
-            Assert.AreEqual(2, pr.Count());
-
+            //foreach (var user in pr)
+            //{
+            //    Console.WriteLine(user.idUser);
+            //    Console.WriteLine(user.FirstName);
+            //}
 
         }
 
@@ -130,7 +140,7 @@ namespace DataModulEntetyTests
         {
             var u = Repository.GerUser(3);
 
-            Assert.AreEqual(u.idUser, 3);
+            Assert.AreEqual(3, u.idUser);
         }
 
         [TestMethod]
@@ -156,7 +166,7 @@ namespace DataModulEntetyTests
         public void UserEditTest()
         {
             var u = Repository.GerUser(10);
-            u.FirstName = "edit";
+            u.FirstName = "edite";
             u.LastName = "editLN";
             u.MiddleName = "editMN";
             u.Email = "edit@t.t";
@@ -166,16 +176,31 @@ namespace DataModulEntetyTests
         [TestMethod]
         public void UserRemove()
         {
-            Repository.Remove(10);
+            Repository.Remove(13);
         }
 
 
         [TestMethod]
         public void TestGetUserNitoces()
         {
-            var un = Repository.GetUserNotices(3);
+            var un = Repository.GetUserNotices(4);
 
-            Assert.AreEqual(1,un.Count());
+            Assert.AreEqual(2,un.Count());
+
+            foreach (var item in un)
+            {
+                Console.WriteLine(item.Name);
+            }
+
+        }
+
+
+        [TestMethod]
+        public void TestSaveUserNotices()
+        {
+            //Repository.SaveUserNotices(14, 1, true);
+            Repository.SaveUserNotices(14, 1, false);
+
         }
     }
 }
